@@ -13,12 +13,12 @@ import constants.Keywords;
 
 public class ApiTest {
 	@Test
-	public void searchMovie() {
-		OmdbApiHelper search = new OmdbApiHelper();
+	public void shouldSearchMovieCorrectly() {
+		OmdbApiHelper apiHelper = new OmdbApiHelper();
 
-		String imdbId = search.getMovieId();
+		String imdbId = apiHelper.getMovieId();
 
-		Response response = search.getMovieById(imdbId);
+		Response response = apiHelper.getMovieById(imdbId);
 
 		MovieModel movie = response.getBody().as(MovieModel.class);
 

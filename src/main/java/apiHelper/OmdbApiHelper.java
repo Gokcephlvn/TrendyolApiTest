@@ -32,7 +32,7 @@ public class OmdbApiHelper {
 			for (MovieModel movie : movies)
 				if (movie.getTitle().equals(movieTitle)) {
 					imdbId = movie.getImdbID();
-					System.out.println("\nEXTRACTED ID: " + imdbId);
+
 					break;
 				}
 
@@ -46,11 +46,7 @@ public class OmdbApiHelper {
 
 	public Response getMovieById(String imdbId) {
 		try {
-			return given()
-					.param("apikey", apiKey)
-					.param("i", imdbId)
-					.when()
-					.get();
+			return given().param("apikey", apiKey).param("i", imdbId).when().get();
 		} catch (Exception ex) {
 			System.out.println("Error! " + ex.getMessage());
 			return null;
@@ -68,8 +64,7 @@ public class OmdbApiHelper {
 					.log()
 					.all()
 					.contentType(ContentType.JSON)
-					.statusCode(200)
-					.body("Search.Title", not(emptyOrNullString())).and()
+					.statusCode(200).body("Search.Title", not(emptyOrNullString())).and()
 					.body("Search.Year", not(emptyOrNullString())).and()
 					.body("Search.Released", not(emptyOrNullString()))
 					.extract()
